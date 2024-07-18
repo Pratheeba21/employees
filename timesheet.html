@@ -1,0 +1,46 @@
+<table border="1">
+    <thead>
+        <tr>
+            {% for date in dates %}
+            <th>{{ date }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for date in dates %}
+        <tr>
+            <td><button onclick="showDialog('{{ date }}')">+</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            {% for date in dates %}
+            <td>Total: {{ total_hours[date] }}</td>
+            {% endfor %}
+        </tr>
+    </tfoot>
+</table>
+
+<div id="dialog" style="display:none;">
+    <form method="post" action="{% url 'timesheet' %}">
+        {% csrf_token %}
+        <input type="hidden" name="date" id="date">
+        <label for="start_time">Start Time:</label>
+        <input type="time" name="start_time" required><br>
+        <label for="end_time">End Time:</label>
+        <input type="time" name="end_time" required><br>
+        <label for="project_name">Project Name:</label>
+        <input type="text" name="project_name" required><br>
+        <label for="comments">Comments:</label>
+        <textarea name="comments"></textarea><br>
+        <button type="submit">Add</button>
+    </form>
+</div>
+
+<script>
+    function showDialog(date) {
+        document.getElementById('date').value = date;
+        document.getElementById('dialog').style.display = 'block';
+    }
+</script>

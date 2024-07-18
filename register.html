@@ -1,0 +1,14 @@
+<form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+    <label for="empid">EmpId:</label>
+    <input type="text" name="empid" required><br>
+    <label for="name">Name:</label>
+    <input type="text" name="name" required><br>
+    <label for="email">Email:</label>
+    <input type="email" name="email" required><br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" required><br>
+    <label for="confirm_password">Confirm Password:</label>
+    <input type="password" name="confirm_password" required><br>
+    <button type="submit">Register</button>
+</form>
